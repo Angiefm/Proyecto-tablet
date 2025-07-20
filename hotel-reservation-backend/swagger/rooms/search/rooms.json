@@ -1,0 +1,63 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Room Search API",
+    "version": "1.0.0",
+    "description": "Endpoint para buscar habitaciones con filtros por capacidad, ubicación y precio"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/rooms/search": {
+      "get": {
+        "summary": "Buscar habitaciones disponibles",
+        "description": "Filtra habitaciones según número de personas, rango de precios y ubicación.",
+        "parameters": [
+          {
+            "name": "people",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "Número mínimo de personas que puede alojar la habitación."
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "description": "Precio mínimo por noche."
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "description": "Precio máximo por noche."
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Ubicación del hotel (ej. Cartagena, Bogotá)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de habitaciones encontradas."
+          },
+          "400": {
+            "description": "Parámetros inválidos o faltantes."
+          },
+          "404": {
+            "description": "No se encontraron habitaciones que coincidan."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    }
+  }
+}

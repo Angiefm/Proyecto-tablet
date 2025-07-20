@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hotel Reservation API - Rooms",
+    "version": "1.0.0",
+    "description": "Endpoints para gestionar habitaciones"
+  },
+  "paths": {
+    "/rooms": {
+      "get": {
+        "summary": "Obtener todas las habitaciones",
+        "responses": {
+          "200": {
+            "description": "Lista de habitaciones"
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear una nueva habitación",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Room"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Habitación creada"
+          }
+        }
+      }
+    },
+    "/rooms/{id}": {
+      "get": {
+        "summary": "Obtener habitación por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Habitación encontrada"
+          },
+          "404": {
+            "description": "No encontrada"
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar habitación por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Room"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Habitación actualizada"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar habitación por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Habitación eliminada"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Room": {
+        "type": "object",
+        "properties": {
+          "hotelId": { "type": "string" },
+          "roomType": { "type": "string" },
+          "pricePerNight": { "type": "number" },
+          "capacity": { "type": "number" },
+          "isAvailable": { "type": "boolean" },
+          "bedDetails": { "type": "string" }
+        },
+        "required": ["hotelId", "roomType", "pricePerNight", "capacity"]
+      }
+    }
+  }
+}
